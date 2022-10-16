@@ -8,6 +8,12 @@ class ListenerConnections(Thread):
         self._server=server
         self.users=[]
 
+    def getOnline(self):
+        online=[]
+        for user in self.users:
+            online.append(user.username)
+        return online
+
     def broadcast(self, message, socket):
         for user in self.users:
             if user.socket != socket:
@@ -15,6 +21,12 @@ class ListenerConnections(Thread):
                     user.socket.send(message.encode("utf-8"))
                 except:
                     print('No se ha podido envia el mensaje')
+
+    def removeUser(self,_user):
+        try:
+            self.users.remove(_user)
+        except:
+            return
 
     def run(self):
         print(f'Server running on port: {self._server.port}')

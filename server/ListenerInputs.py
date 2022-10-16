@@ -11,7 +11,7 @@ class ListenerInputs(Thread):
             if msg == "/close":
                 self._server.stop_server()
             elif msg == "/users":
-                print(f'online:')
+                print('online: '+ str(self._server.getOnline()))
             else:
                 self._server.broadcast(f'(SERVER): {msg}', 0)
             

@@ -9,6 +9,7 @@ class ClientInputs(Thread):
         while  self.client.listener :
             msg = input("-> ")
             if msg.lower() == "bye":
+                self.client.socket.send(msg.encode("utf-8"))
                 self.client.stop_client()
             else:
                 self.client.socket.send(msg.encode("utf-8"))
